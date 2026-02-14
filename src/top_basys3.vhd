@@ -65,6 +65,12 @@ architecture top_basys3_arch of top_basys3 is
         Cout  : out std_logic
         );
     end component full_adder;
+    
+    signal carry0 : std_logic;
+    signal carry1 : std_logic;
+    signal carry2 : std_logic;
+
+
 
     -- declare any signals you will need	
   
@@ -72,39 +78,39 @@ begin
 	-- PORT MAPS --------------------
     full_adder_0: full_adder
     port map(
-        A     => A(0),
-        B     => B(0),
-        Cin   => Cin,   -- Directly to input here
-        S     => S(0),
-        Cout  => w_carry(0)
+        A  => sw(1),
+        B => sw(12),
+        Cin => sw(0),   -- Directly to input here
+        S     => led(0),
+        Cout  => carry0
     );
 
     full_adder_1: full_adder
     port map(
-        A     => A(1),
-        B     => B(1),
-        Cin   => w_carry(0),
-        S     => S(1),
-        Cout  => w_carry(1)
+        A     => sw(2),
+        B     => sw(13),
+        Cin   => carry0,
+        S     => led(1),
+        Cout  => carry1
     );
     
 -- PORT MAPS --------------------
     full_adder_2: full_adder
     port map(
-        A     => A(2),
-        B     => B(2),
-        Cin   => w_carry(1),
-        S     => S(2),
-        Cout  => w_carry(2)
+        A     => sw(3),
+        B     => sw(14),
+        Cin   => carry1,
+        S     => led(2),
+        Cout  => carry2
     );
 
     full_adder_3: full_adder
     port map(
-        A     => A(3),
-        B     => B(3),
-        Cin   => w_carry(2),
-        S     => S(3),
-        Cout  => Cout
+        A     => sw(4),
+        B     => sw(15),
+        Cin   => carry2,
+        S     => led(3),
+        Cout  => led(15)
     );
    
 	---------------------------------
